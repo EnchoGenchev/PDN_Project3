@@ -1,23 +1,39 @@
-in=in.fna # starter input file name, can set like "make run_starter in=other.fna"
+in=GRCh38_latest_rna.fna
 
-all: make_starter
+all: Exp1 Exp2
 
-# duplicate this for other files
-make_starter: compute_average_TF_Exp1_starter.c
-	gcc -fopenmp -g -Wall -o compute_average_TF_Exp1_starter compute_average_TF_Exp1_starter.c -lm -std=c99
-	
+# Experiment 1 Compilations
+Exp1: compute_average_TF_Exp1_critical compute_average_TF_Exp1_atomic compute_average_TF_Exp1_locks
+
+compute_average_TF_Exp1_critical: compute_average_TF_Exp1_critical.c
+	gcc -fopenmp -O3 -Wall -o compute_average_TF_Exp1_critical compute_average_TF_Exp1_critical.c -lm -std=c99
+
+compute_average_TF_Exp1_atomic: compute_average_TF_Exp1_atomic.c
+	gcc -fopenmp -O3 -Wall -o compute_average_TF_Exp1_atomic compute_average_TF_Exp1_atomic.c -lm -std=c99
+
+compute_average_TF_Exp1_locks: compute_average_TF_Exp1_locks.c
+	gcc -fopenmp -O3 -Wall -o compute_average_TF_Exp1_locks compute_average_TF_Exp1_locks.c -lm -std=c99
+
+# Experiment 2 Compilation
+Exp2: compute_average_TF_Exp2_schedule
+
+compute_average_TF_Exp2_schedule: compute_average_TF_Exp2_schedule.c
+	gcc -fopenmp -O3 -Wall -o compute_average_TF_Exp2_schedule compute_average_TF_Exp2_schedule.c -lm -std=c99
 
 clean:
-	$(RM) compute_average_TF_Exp1_starter
+	$(RM) compute_average_TF_Exp1_critical compute_average_TF_Exp1_atomic compute_average_TF_Exp1_locks compute_average_TF_Exp2_schedule *.csv
 
+# Run Commands
+run_critical:
+	./compute_average_TF_Exp1_critical $(in) OUTPUT_crit.csv TIME_crit.csv 8
 
-# Below are commands to help you run your program easily.
-# You will need to create more entries for your different files, such as for critical and locks.
-run: run_starter
+run_atomic:
+	./compute_average_TF_Exp1_atomic $(in) OUTPUT_atom.csv TIME_atom.csv 8
 
-# duplicate this for other files
-run_starter:
-	./compute_average_TF_Exp1_starter $(in) OUTPUT_starter_1th.csv TIME_starter_1th.csv 1
-	./compute_average_TF_Exp1_starter $(in) OUTPUT_starter_2th.csv TIME_starter_2th.csv 2
-	./compute_average_TF_Exp1_starter $(in) OUTPUT_starter_4th.csv TIME_starter_4th.csv 4
-	./compute_average_TF_Exp1_starter $(in) OUTPUT_starter_8th.csv TIME_starter_8th.csv 8
+run_locks:
+	./compute_average_TF_Exp1_locks $(in) OUTPUT_locks.csv TIME_locks.csv 8
+
+run_exp2:
+	export OMP_SCHEDULE="static" && ./compute_average_TF_Exp2_schedule $(in) OUT_static.csv TIME_static.csv 8
+	export OMP_SCHEDULE="dynamic" && ./compute_average_TF_Exp2_schedule $(in) OUT_dyn.csv TIME_dyn.csv 8
+	export OMP_SCHEDULE="guided" && ./compute_average_TF_Exp2_schedule $(in) OUT_guid.csv TIME_guid.csv 8
