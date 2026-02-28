@@ -49,18 +49,40 @@ struct Genes read_genes(FILE* inputFile) {
 }
 
 void process_tetranucs(struct Genes genes, int* gene_TF, int gene_index) {
+    //process gene array
     int N = genes.gene_sizes[gene_index];
     unsigned char* sequence = &genes.gene_sequences[gene_index * GENE_SIZE];
-    if (N < 4) return;
 
+    //need 4 nucleotides
     for (int i = 0; i <= N - 4; ++i) {
         int idx = 0;
+        int valid = 1;
+
+        //convert substring to values 0-255
         for (int j = 0; j < 4; ++j) {
             char c = sequence[i + j];
-            int val = (c == 'A') ? 0 : (c == 'C') ? 1 : (c == 'G') ? 2 : 3;
-            idx = (idx << 2) | val; 
+            int val;
+            if (c == 'A') 
+                val = 0;
+            else if (c == 'C') 
+                val = 1;
+            else if (c == 'G') 
+                val = 2;
+            else if (c == 'T') 
+                val = 3;
+            else {
+                valid = 0; //handle other characters
+                break;
+            }
+
+            //idx = Window[0]*64 + Window[1]*16 + Window[2]*4 + Window[3] 
+            //updates with each iteration, not all at once
+            idx = (idx * 4) + val;
         }
-        gene_TF[idx]++;
+
+        if (valid) {
+            gene_TF[idx]++;
+        }
     }
 }
 
