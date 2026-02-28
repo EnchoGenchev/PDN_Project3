@@ -1,2 +1,2 @@
-,P2-50-critical-T8,P2-50-atomic-T8,P2-50-locks-T8,P2-50-schedule-T8,P2-Reduced-critical-T8,P2-Reduced-atomic-T8,P2-Reduced-locks-T8,P2-Reduced-schedule-T8
-student,0.000778,0.000777,0.000903,0.000668,0.205247,0.210158,0.4182,0.20872
+,P2-50-critical-T8,P2-50-atomic-T8,P2-50-locks-T8,P2-50-schedule-T8,P2-Reduced-critical-T8,P2-Reduced-atomic-T8,P2-Reduced-locks-T8,P2-Reduced-schedule-T8,P2-Latest-critical-T8,P2-Latest-atomic-T8,P2-Latest-locks-T8,P2-Latest-schedule-T8
+student,0.000825,0.000814,0.001024,0.000662,0.205133,0.21067,0.44476,0.208392,1.223912,1.237722,2.273907,1.06414

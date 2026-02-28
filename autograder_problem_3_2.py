@@ -57,12 +57,12 @@ class Autograder_3_2(Base_Autograder):
             ],
 
             # All items
-            # [
-            #     ["P2-Latest-critical"],   # critical
-            #     ["P2-Latest-atomic"],     # atomic
-            #     ["P2-Latest-locks"],      # locks
-            #     ["P2-Latest-schedule"]    # schedule
-            # ]
+            [
+                ["P2-Latest-critical"],   # critical
+                ["P2-Latest-atomic"],     # atomic
+                ["P2-Latest-locks"],      # locks
+                ["P2-Latest-schedule"]    # schedule
+            ]
         ]
 
 
@@ -157,7 +157,7 @@ class Autograder_3_2(Base_Autograder):
             [[], [], [], [], []],   # reduced
             [[], [], [], [], []]    # latest
         ]
-        rna = ["50", "reduced"] #"latest"
+        rna = ["50", "reduced", "latest"]
         for out in range(len(t_out)):
             for pre in range(len(t_p2_prefix)):
                 for t in self.threads:
