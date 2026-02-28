@@ -134,14 +134,14 @@ class Autograder_3_2(Base_Autograder):
         t_rna = [
             os.path.join(test_in_dir, "GRCh38_50_rna.fna"),
             os.path.join(test_in_dir, "GRCh38_reduced_rna.fna"),
-            # os.path.join(test_in_dir, "GRCh38_latest_rna.fna")
+            os.path.join(test_in_dir, "GRCh38_latest_rna.fna")
         ]
 
         # The expected output files
         t_out = [
             os.path.join(test_out_dir, "p2_output_50.csv"),
             os.path.join(test_out_dir, "p2_output_reduced.csv"),
-            # os.path.join(test_out_dir, "p2_output_latest.csv")
+            os.path.join(test_out_dir, "p2_output_latest.csv")
         ]
 
         # The actual output from the student
@@ -150,12 +150,12 @@ class Autograder_3_2(Base_Autograder):
         t_p2_get = [
             [[], [], [], [], []],   # 50
             [[], [], [], [], []],   # reduced
-            # [[], [], [], [], []]    # latest
+            [[], [], [], [], []]    # latest
         ]
         t_p2_tim = [
             [[], [], [], [], []],   # 50
             [[], [], [], [], []],   # reduced
-            # [[], [], [], [], []]    # latest
+            [[], [], [], [], []]    # latest
         ]
         rna = ["50", "reduced"] #"latest"
         for out in range(len(t_out)):
@@ -174,7 +174,7 @@ class Autograder_3_2(Base_Autograder):
         c_p2 = [
             [[], [], [], [], []],   # 50
             [[], [], [], [], []],   # reduced
-            # [[], [], [], [], []]    # latest
+            [[], [], [], [], []]    # latest
         ]
 
         # Alternate program names, if needed
@@ -206,7 +206,7 @@ class Autograder_3_2(Base_Autograder):
         test_params = [
             [[], [], [], [], []],   # 50
             [[], [], [], [], []],   # reduced
-            # [[], [], [], [], []]    # latest
+            [[], [], [], [], []]    # latest
         ]
         for file in range(len(t_rna)):            # For RNA input
             for program in range(len(p2_names)):  # For program names

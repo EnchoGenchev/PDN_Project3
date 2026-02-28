@@ -14,12 +14,12 @@
 #
 # --------------------- Change the items below here! ---------------------
 #
-#SBATCH --mail-user=yourEmailHere@ou.edu
+#SBATCH --mail-user=encho.s.genchev-1@ou.edu
 #SBATCH --mail-type=ALL
 #
-#SBATCH --chdir=/home/oucspdnxxx/ ... /Project_3/Problem_2
-#SBATCH --output=/home/oucspdnxxx/ ... /Project_3/Problem_2/_P3-2_%J_stdout.txt
-#SBATCH --error=/home/oucspdnxxx/ ... /Project_3/Problem_2/_P3-2_%J_stderr.txt
+#SBATCH --chdir=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/Problem_2
+#SBATCH --output=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/Problem_2/_P3-2_%J_stdout.txt
+#SBATCH --error=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/Problem_2/_P3-2_%J_stderr.txt
 
 #################################################
 
