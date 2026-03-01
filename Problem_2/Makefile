@@ -34,6 +34,4 @@ run_locks:
 	./compute_average_TF_Exp1_locks $(in) OUTPUT_locks.csv TIME_locks.csv 8
 
 run_exp2:
-	export OMP_SCHEDULE="static" && ./compute_average_TF_Exp2_schedule $(in) OUT_static.csv TIME_static.csv 8
-	export OMP_SCHEDULE="dynamic" && ./compute_average_TF_Exp2_schedule $(in) OUT_dyn.csv TIME_dyn.csv 8
-	export OMP_SCHEDULE="guided" && ./compute_average_TF_Exp2_schedule $(in) OUT_guid.csv TIME_guid.csv 8
+	./compute_average_TF_Exp2_schedule $(in) OUT_static.csv TIME_static.csv 8

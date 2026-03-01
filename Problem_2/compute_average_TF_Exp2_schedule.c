@@ -166,31 +166,33 @@ int main(int argc, char* argv[]) {
         fclose(outputFile);
         exit(-4);
     }
-
+    
     struct Genes genes = read_genes(inputFile);
 
     // Total number of tetranucs
-    int* TF = (int*)calloc(NUM_TETRANUCS, sizeof(int));
-
+    int* TF = (int*)calloc(NUM_TETRANUCS, sizeof(int));    
+    
     //getting rdy for parallelization
     omp_set_num_threads(num_threads);
     double start = omp_get_wtime();
 
-    // Experiment 2: schedule(runtime) allows external control via OMP_SCHEDULE
     #pragma omp parallel default(none) shared(genes, TF)
     {
-        #pragma omp for schedule(runtime)
+        #pragma omp for schedule(guided)
         for (int gene_index = 0; gene_index < genes.num_genes; ++gene_index) {
-            int* gene_TF = (int*)calloc(NUM_TETRANUCS, sizeof(int));; 
-            process_tetranucs(genes, gene_TF, gene_index);
-
-            for (int t = 0; t < NUM_TETRANUCS; ++t) {
-                if (gene_TF[t] > 0) {
-                    #pragma omp atomic
-                    TF[t] += gene_TF[t];
-                }
-            }
             
+            // Compute this gene's TF
+            int* gene_TF = (int*)calloc(NUM_TETRANUCS, sizeof(int));
+            //updates gene_TF passed by reference
+            process_tetranucs(genes, gene_TF, gene_index);
+            
+            //uses critical section to prevent race condition
+            #pragma omp critical
+            {
+                for (int t = 0; t < NUM_TETRANUCS; ++t)
+                    TF[t] += gene_TF[t];
+            }
+
             free(gene_TF);
         }
     }
