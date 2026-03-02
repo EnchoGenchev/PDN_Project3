@@ -17,21 +17,21 @@
 #SBATCH --mail-type=ALL
 #
 #SBATCH --chdir=/home/oucspdn019/Project_3/Genchev_Encho_Project_3
-#SBATCH --output=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/_P3-2_%J_stdout.txt
-#SBATCH --error=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/_P3-2_%J_stderr.txt
+#SBATCH --output=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/_P3_%J_stdout.txt
+#SBATCH --error=/home/oucspdn019/Project_3/Genchev_Encho_Project_3/_P3_%J_stderr.txt
 
 #################################################
 
 source /home/oucspdnta/activate_pdn_env.sh
 
 # To run all the problems and get all results
-# python3 -u autograder_project_3.py
+python3 -u autograder_project_3.py
 
 # To run just problem 2's autograder
 #python3 -u autograder_problem_3_2.py
 
 # To run just problem 3's autograder
-python3 -u autograder_problem_3_3.py
+# python3 -u autograder_problem_3_3.py
 
 # To run just problem 4's autograder
 # python3 -u autograder_problem_3_4.py
